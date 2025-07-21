@@ -1,0 +1,15 @@
+{
+  "name": "ai-resume-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
+    "openai": "^5.9.0"
+  }
+}
+ 
