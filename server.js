@@ -13,7 +13,7 @@ app.use(express.json());
 
 // Ստեղծում ենք OpenAI client-ը
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.VITE_OPENAI_API_KEY,
 });
 
 // Test route
@@ -39,7 +39,14 @@ app.post("/api/generate-resume", async (req, res) => {
     return res.json({ result });
   } catch (error) {
     console.error("OpenAI error:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    // Ավելացնում ենք error details-ը front-end-ին (ամբողջությամբ stringify)
+    let errorText = "";
+    try {
+      errorText = JSON.stringify(error, Object.getOwnPropertyNames(error));
+    } catch {
+      errorText = error?.message || error?.toString() || "Internal Server Error";
+    }
+    res.status(500).json({ error: errorText });
   }
 });
 
